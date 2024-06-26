@@ -4,12 +4,10 @@
 
 ## Table of Contents
 
-- [Introduction](#introduction)
+- [Images](#Images)
 - [Features](#features)
 - [Technologies Used](#technologies-used)
-- [Getting Started](#getting-started)
-- [API Endpoints](#api-endpoints)
-- [Exception Handling](#exception-handling)
+
 
 
 ## Images
