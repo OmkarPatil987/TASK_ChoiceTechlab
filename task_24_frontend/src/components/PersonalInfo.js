@@ -13,10 +13,8 @@ const PersonalInfo = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate form fields
     const validationErrors = {};
 
-    // Ensure formRef.current is valid
     if (!formRef.current) {
       console.error('Form reference is not valid.');
       return;
@@ -40,11 +38,7 @@ const PersonalInfo = () => {
     } else {
       const birthDate = new Date(dob);
       let age = new Date().getFullYear() - birthDate.getFullYear();
-      const monthDifference = new Date().getMonth() - birthDate.getMonth();
-      const dayDifference = new Date().getDate() - birthDate.getDate();
-      if (monthDifference < 0 || (monthDifference === 0 && dayDifference < 0)) {
-        age--;
-      }
+     
       if (age < 18) {
         validationErrors.dob = 'You must be at least 18 years old.';
       }
@@ -60,11 +54,12 @@ const PersonalInfo = () => {
       validationErrors.mobile = 'Mobile number must be 10 digits.';
     }
 
-    if (!email) {
-      validationErrors.email = 'Email is required.';
-    } else if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
-      validationErrors.email = 'Invalid email format.';
-    }
+   if (!email) {
+  validationErrors.email = 'Email is required.';
+} else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+  validationErrors.email = 'Invalid email format.';
+}
+
 
     if (!resume) {
       validationErrors.resume = 'Resume is required.';
@@ -89,18 +84,15 @@ const PersonalInfo = () => {
         }
       }));
 
-      // Make POST request to backend API
       await axios.post('http://localhost:5000/personal-info', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       });
       
-      // Navigate to the next step
       navigate('/profile-info');
     } catch (error) {
       console.error('Error submitting data:', error);
-      // Handle error scenario (show error message, etc.)
     }
   };
 
